@@ -1,0 +1,309 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled3.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMT6kUiaK8eUsmXxXWlwlOk",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/vikasdu95/python_for_datascience/blob/master/Web-scrapping%20-%20amazon%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 6,
+      "metadata": {
+        "id": "WlWh5x9XzXTT",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5a5a0438-61f1-4dd7-f20f-7763d4820847"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: Autoscraper in /usr/local/lib/python3.7/dist-packages (1.1.12)\n",
+            "Requirement already satisfied: lxml in /usr/local/lib/python3.7/dist-packages (from Autoscraper) (4.2.6)\n",
+            "Requirement already satisfied: bs4 in /usr/local/lib/python3.7/dist-packages (from Autoscraper) (0.0.1)\n",
+            "Requirement already satisfied: requests in /usr/local/lib/python3.7/dist-packages (from Autoscraper) (2.23.0)\n",
+            "Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.7/dist-packages (from bs4->Autoscraper) (4.6.3)\n",
+            "Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests->Autoscraper) (1.24.3)\n",
+            "Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests->Autoscraper) (2.10)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests->Autoscraper) (2022.5.18.1)\n",
+            "Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests->Autoscraper) (3.0.4)\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install Autoscraper\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from autoscraper import AutoScraper"
+      ],
+      "metadata": {
+        "id": "zohi7DEHqG2v"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "link = \"https://www.amazon.in/s?k=smartwatch&crid\"\n",
+        "\n",
+        "wanted_list = ['₹2,999','Fire-Boltt Ninja Calling 1.69\" Full Touch Bluetooth Calling Smartwatch with 30 Sports Mode, SpO2, Heart Rate Monitoring & AI Voice Assistant, Metal Grey','8,433' ]"
+      ],
+      "metadata": {
+        "id": "x9Rwb3FY5Acy"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "scraper = AutoScraper()\n",
+        "result = scraper.build(link,wanted_list)"
+      ],
+      "metadata": {
+        "id": "tIH_TE0y5SJ3"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(result)"
+      ],
+      "metadata": {
+        "id": "AoRzmZoy6P64",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d28e0ccc-c1f1-4128-9ef6-9b73ce67c4b7"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['₹2,999', '₹7,999', '₹5,499', '₹8,990', '₹2,499', '₹3,999', '₹1,999', '₹6,990', '₹4,999', '₹5,999', '₹3,499', '₹7,990', '₹599', '₹2,149', '₹1,899', '₹1,699', '₹4,499', '₹9,999', '₹1,799', '₹4,799', '₹12,999', '₹5,998', '₹8,995', '₹11,995', '₹598', 'Fire-Boltt Ninja Calling 1.69\" Full Touch Bluetooth Calling Smartwatch with 30 Sports Mode, SpO2, Heart Rate Monitoring & AI Voice Assistant, Metal Grey', 'boAt Primia with Bluetooth Calling, AMOLED Display, AI Voice Assistant, HR, SpO2, Stress & Sleep Monitoring,Activity Tracker & Multiple Sports Modes(Active Black), One Size (Watch Primia)', 'Noise ColorFit Pulse Grand Smart Watch with 1.69\" HD Display, 60 Sports Modes, 150 Watch Faces, Fast Charge, Spo2 Monitoring Smartwatches for Men & Women (Oilve Green)', 'boAt Wave Lite Smartwatch with 1.69 Inches HD Display, Heart Rate & SpO2 Level Monitor, 140+ Watch Faces, Activity Tracker, Multiple Sports Modes & IP68(Active Black)', 'Noise ColorFit Pulse Smartwatch with 1.4\" Full Touch HD Display, SpO2, Heart Rate, Sleep Monitors & 10-Day Battery - Teal Green', 'Noise ColorFit Ultra Smart Watch with 1.75\" HD Display, Aluminium Alloy Body, 60 Sports Modes, Spo2, Lightweight, Stock Market Info, Calls & SMS Reply (Gunmetal Grey)']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "scraper.get_result_similar(link, grouped = True )"
+      ],
+      "metadata": {
+        "id": "WImEqSi6FPDk",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "68899946-678d-4fcc-d617-1772a2e2a97d"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'rule_0n98': ['₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹5,499',\n",
+              "  '₹8,990',\n",
+              "  '₹2,799',\n",
+              "  '₹5,999',\n",
+              "  '₹2,499',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹4,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990'],\n",
+              " 'rule_4ssm': ['₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹5,499',\n",
+              "  '₹8,990',\n",
+              "  '₹2,799',\n",
+              "  '₹5,999',\n",
+              "  '₹2,499',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹4,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990'],\n",
+              " 'rule_55uy': ['₹3,499',\n",
+              "  '₹7,990',\n",
+              "  '₹599',\n",
+              "  '₹2,149',\n",
+              "  '₹1,899',\n",
+              "  '₹4,999',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹1,699',\n",
+              "  '₹4,999',\n",
+              "  '₹4,499',\n",
+              "  '₹9,999',\n",
+              "  '₹1,999',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹3,999',\n",
+              "  '₹1,699',\n",
+              "  '₹4,999',\n",
+              "  '₹2,499',\n",
+              "  '₹6,990',\n",
+              "  '₹1,799',\n",
+              "  '₹3,999',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹1,899',\n",
+              "  '₹5,999',\n",
+              "  '₹4,799',\n",
+              "  '₹12,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999'],\n",
+              " 'rule_945u': ['₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹5,499',\n",
+              "  '₹8,990',\n",
+              "  '₹2,799',\n",
+              "  '₹5,999',\n",
+              "  '₹2,499',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹4,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990'],\n",
+              " 'rule_c4wd': ['₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹5,499',\n",
+              "  '₹8,990',\n",
+              "  '₹2,799',\n",
+              "  '₹5,999',\n",
+              "  '₹2,499',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹4,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990'],\n",
+              " 'rule_doqb': ['Fire-Boltt Ninja Calling 1.69\" Full Touch Bluetooth Calling Smartwatch with 30 Sports Mode, SpO2, Heart Rate Monitoring & AI Voice Assistant, Black',\n",
+              "  'boAt Primia with Bluetooth Calling, AMOLED Display, AI Voice Assistant, HR, SpO2, Stress & Sleep Monitoring,Activity Tracker & Multiple Sports Modes(Active Black), One Size (Watch Primia)',\n",
+              "  'Noise ColorFit Ultra Smart Watch with 1.75\" HD Display, Aluminium Alloy Body, 60 Sports Modes, Spo2, Lightweight, Stock Market Info, Calls & SMS Reply (Space Blue)',\n",
+              "  'Noise ColorFit Pulse Grand Smart Watch with 1.69\" HD Display, 60 Sports Modes, 150 Watch Faces, Fast Charge, Spo2 Monitoring Smartwatches for Men & Women (Oilve Green)',\n",
+              "  'Noise ColorFit Pulse Smartwatch with 1.4\" Full Touch HD Display, SpO2, Heart Rate, Sleep Monitors & 10-Day Battery - Teal Green',\n",
+              "  'boAt Wave Lite Smartwatch with 1.69 Inches HD Display, Heart Rate & SpO2 Level Monitor, 140+ Watch Faces, Activity Tracker, Multiple Sports Modes & IP68(Active Black)'],\n",
+              " 'rule_jv0h': ['₹3,499',\n",
+              "  '₹7,990',\n",
+              "  '₹599',\n",
+              "  '₹2,149',\n",
+              "  '₹1,899',\n",
+              "  '₹4,999',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹1,699',\n",
+              "  '₹4,999',\n",
+              "  '₹4,499',\n",
+              "  '₹9,999',\n",
+              "  '₹1,999',\n",
+              "  '₹3,999',\n",
+              "  '₹1,999',\n",
+              "  '₹3,999',\n",
+              "  '₹1,699',\n",
+              "  '₹4,999',\n",
+              "  '₹2,499',\n",
+              "  '₹6,990',\n",
+              "  '₹1,799',\n",
+              "  '₹3,999',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999',\n",
+              "  '₹1,899',\n",
+              "  '₹5,999',\n",
+              "  '₹4,799',\n",
+              "  '₹12,999',\n",
+              "  '₹1,999',\n",
+              "  '₹6,990',\n",
+              "  '₹2,999',\n",
+              "  '₹7,999']}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "scraper.set_rule_aliases({'rule_doqb': 'Title'})\n",
+        "scraper.keep_rules(['rule_doqb'])\n",
+        "scraper.save('amazon-search')"
+      ],
+      "metadata": {
+        "id": "PUUKqoTWDajP"
+      },
+      "execution_count": 15,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "scraper.get_result_similar(link,group_by_alias=True)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4L7-xrDYNJh8",
+        "outputId": "df6a3312-34ae-4238-a1a2-eb52b1e59958"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'Title': ['HONOR Watch GS 3 Smartwatch with 1.43\" AMOLED Touch Screen, Fitness Watch with Heart Rate, Sleep and Blood Oxygen, Dual GPS, Super Charge,14 Days Life, 100+ Diverse Sport Modes, Midnight Black',\n",
+              "  'Fire-Boltt Ninja Calling 1.69\" Full Touch Bluetooth Calling Smartwatch with 30 Sports Mode, SpO2, Heart Rate Monitoring & AI Voice Assistant, Black',\n",
+              "  'Noise ColorFit Pulse Smartwatch with 1.4\" Full Touch HD Display, SpO2, Heart Rate, Sleep Monitors & 10-Day Battery - Teal Green',\n",
+              "  'Noise ColorFit Ultra Smart Watch with 1.75\" HD Display, Aluminium Alloy Body, 60 Sports Modes, Spo2, Lightweight, Stock Market Info, Calls & SMS Reply (Space Blue)',\n",
+              "  'boAt Wave Lite Smartwatch with 1.69 Inches HD Display, Heart Rate & SpO2 Level Monitor, 140+ Watch Faces, Activity Tracker, Multiple Sports Modes & IP68(Active Black)',\n",
+              "  'boAt Primia with Bluetooth Calling, AMOLED Display, AI Voice Assistant, HR, SpO2, Stress & Sleep Monitoring,Activity Tracker & Multiple Sports Modes(Active Black), One Size (Watch Primia)']}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 16
+        }
+      ]
+    }
+  ]
+}
